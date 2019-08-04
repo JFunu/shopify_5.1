@@ -19,4 +19,10 @@ class Shop extends BaseResource{
         $this->requester = $requester;
         $this->requester->resource = '/admin/shop';
     }
+
+    public function uninstall()
+    {
+        $this->requester->resource = '/admin/api_permissions/current';
+        return $this->requester->delete();
+    }
 } 

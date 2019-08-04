@@ -43,7 +43,7 @@ class BaseResource implements ResourceInterface{
     public function remove ( $id )
     {
         if(is_null($id))
-            throw new ShopifyException('Product Id not provided');
+            throw new ShopifyException('Resource Id not provided');
 
         return $this->requester->delete( $id );
     }

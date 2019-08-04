@@ -38,6 +38,10 @@ class Shopify {
         return $this->requestor->install();
     }
 
+    public function uninstall()
+    {
+        return $this->__call('shops', [])->uninstall();
+    }
 
     public function getAccessToken($responseParams)
     {

@@ -152,9 +152,9 @@ class ApiRequestor {
     }
 
 
-    public function appendResourceId($url, $productId)
+    public function appendResourceId($url, $resourceId)
     {
-        return $url.'/'.$productId;
+        return (is_null($resourceId)) ? $url : $url.'/'.$resourceId;
     }
 
 
@@ -256,10 +256,6 @@ class ApiRequestor {
     {
         try{
             $this->url = $this->jsonizeUrl($this->getUrl());
-//            $request = $this->client->post($this->url, $this->getHeaders(), json_encode($post_data));
-//            $request->getCurlOptions()->set('CURLOPT_SSLVERSION', 3);
-//            $response = $request->send();
-//            return $response->json();
 
             $response = $this->client->post($this->url, [
                 'headers' => $this->getHeaders(),
@@ -279,11 +275,6 @@ class ApiRequestor {
         try{
             $this->url = $this->jsonizeUrl($this->appendResourceId($this->getUrl(), $id));
 
-//            $request = $this->client->put($this->url, $this->getHeaders(), json_encode($modify_data));
-//            $request->getCurlOptions()->set('CURLOPT_SSLVERSION', 3);
-//            $response = $request->send();
-//            return $response->json();
-
             $response = $this->client->put($this->url, [
                 'headers' => $this->getHeaders(),
                 'json'    => $modify_data,
@@ -296,7 +287,7 @@ class ApiRequestor {
         }
     }
 
-    public function delete ( $id )
+    public function delete ( $id = null )
     {
         try{
             $this->url = $this->jsonizeUrl($this->appendResourceId($this->getUrl(), $id));
